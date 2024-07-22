@@ -1,11 +1,13 @@
 import React from 'react'
 import AddRoom from './components/room/AddRoom'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+import "/node_modules/bootstrap/dist/js/bootstrap.min.js"
 
-const App = () => {
+function App() {
   return (
-    <AddRoom />
+    <>
+      <AddRoom />
+    </>
   )
 }
 

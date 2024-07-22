@@ -20,7 +20,6 @@ const AddRoom = () => {
     let value = e.target.value
     if (name === "roomPrice") {
       if (!isNaN(value)) {
-      value.parseInt(value)
     } else {
       value = ""
     }
@@ -43,8 +42,9 @@ const handleSubmit = async(e) => {
   e.preventDefault()
   try {
     const success = await addRoom(newRoom.photo, newRoom.roomType, newRoom.roomPrice)
+    
     if (success !== undefined) {
-      setSuccessMessage("A new room was added to the database")
+      setSuccessMessage("A new room was added to the database Successfully !")
       setNewRoom({photo: null, roomType: "", roomPrice: ""})
       setImagePreview("")
       setErrorMessage("")
@@ -54,6 +54,12 @@ const handleSubmit = async(e) => {
   } catch (error) {
     setErrorMessage(error.message)
   }
+
+  setTimeout(() => {
+    setSuccessMessage("")
+    setErrorMessage("")
+  }, 3000)
+  
 }
 
 
@@ -63,6 +69,14 @@ const handleSubmit = async(e) => {
       <div className='row justify-content-center'>
         <div className='col-md-8 col-lg-6'>
           <h2 className='mt-5 mb-2'>Add a New Room</h2>
+
+          {successMessage && (
+            <div className='alert alert-success fade show'>{successMessage}</div>
+          )}
+
+          {errorMessage && (
+            <div className='alert alert-danger fade show'>{errorMessage}</div>
+          )}
 
           <form onSubmit={handleSubmit}>
             
@@ -80,11 +94,11 @@ const handleSubmit = async(e) => {
               <label htmlFor="roomPrice" className='form-label'>Room Price</label>
               <input 
               className='form-control' 
-              required id='roomPrice'  
-              type='number'
-              name='roomPrice' 
+              required 
+              id='roomPrice' 
+              name='roomPrice'
               value={newRoom.roomPrice}
-              onChange={handleImageChange}
+              onChange={handleRoomInputChange}
               />
             </div>
 
@@ -108,7 +122,8 @@ const handleSubmit = async(e) => {
             </div>
 
             <div className='d-grid d-md-flex mt-2'>
-              <button className='btn btn-outline-primary ml-5'>
+              <button className='btn btn-outline-primary ml-5'
+              >
                 Save Room
               </button>
             </div>

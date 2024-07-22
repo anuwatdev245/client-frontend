@@ -24,8 +24,8 @@ const RoomTypeSelector = ({handleRoomInputChange, newRoom}) => {
         setRoomTypes([...roomTypes, newRoomType])
         setNewRoomType("")
         setShowNewroomTypeInput(false)
-
       }
+      console.log(newRoomType)
     }
 
 
@@ -34,12 +34,12 @@ const RoomTypeSelector = ({handleRoomInputChange, newRoom}) => {
 
     {roomTypes.length > 0 && (
       <div>
-        <select 
+        <select  
+        id="roomType"
         name="roomType" 
-        id="roomType" 
         value={newRoom.roomType}
         onChange={(e) => {
-          if (e.target.value === "Add new") {
+          if (e.target.value === "Add New") {
             setShowNewroomTypeInput(true)
           } else {
             handleRoomInputChange(e)
@@ -47,14 +47,14 @@ const RoomTypeSelector = ({handleRoomInputChange, newRoom}) => {
         }}>
 
           <option value={""}> select a room type </option>
-          <option value="Add New"> Add New </option>
+          <option value={"Add New"}> Add New </option>
           {roomTypes.map((type, index) => (
             <option key={index} value={type}>
               {type}
             </option>
           ))}
-
         </select>
+
         {ShowNewroomTypeInput && (
           <div className='input-group'>
             <input
